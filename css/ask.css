@@ -116,3 +116,6 @@ border-radius: 2px;
     border-color: #0d6efd;
     border-radius: 5px;
 }
+.form-control {
+  width: 99%;
+}
