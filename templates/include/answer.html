@@ -1,0 +1,38 @@
+ {% load static %}
+
+<div class="row question">
+  <div class="col-3">
+    <div class="col"><img src="{% static "img/200.jpg" %}"></div>
+    <div class="col">
+      <div class="vote-topic-wrapper">
+        <div class="vote-topic vote-self vote-count-zero">
+          <button class="vote-btn vote-down" data-direction="minus">
+            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+          </button>
+          <input type="text" value="0" class="vote-count">
+          <button class="vote-btn vote-up" data-direction="plus">
+            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-9">
+    <div class="row row-cols-1">
+      <div class="col">
+          <h2>{{ answer.title }}</h2>
+        <div>{{ answer.text }}</div>
+      </div>
+      <div class="row row-cols-2 answer">
+        <div class="col-1">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Correct!
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

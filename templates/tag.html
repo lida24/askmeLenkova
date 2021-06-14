@@ -1,0 +1,24 @@
+{% extends "include/base.html" %}
+{% load static %}
+{% block link %}
+<link rel="stylesheet" href="{% static "font-awesome-4.7.0/css/font-awesome.min.css" %}">
+{% endblock link %}
+{% block header %}
+{% include "include/navbar_user.html" %}
+{% endblock header %}
+{% block content %}
+<div class="row t_input">
+<div class="col-7">
+  <h1>Tag: {{ tag }} </h1>
+</div>
+</div>
+{% for question in questions %}
+{% include "include/question.html" %}
+{% endfor %}
+{% endblock content %}
+{% block pagination %}
+{% include "include/pagination.html" %}
+{% endblock pagination %}
+{% block linkjs %}
+  <script src="{% static "js/counter.js" %}"></script>
+{% endblock linkjs %}

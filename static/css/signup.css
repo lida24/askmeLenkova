@@ -1,0 +1,38 @@
+.signup form {
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+}
+form > input {
+  position: relative;
+  background: white;
+  border-bottom: 1px solid #ccc;
+}
+form > input[type = "text"],
+form  > input[type = "email"],
+form  > input[type = "password"] {
+  width: 100%;
+  border: 0;
+  padding: 20px 20px 20px 50px;
+  background: #eee;
+}
+form input[type="submit"] {
+  display: block;
+  width: 100%;
+  margin: 20px 0;
+  background: #41D873;
+  color: white;
+  border: 0;
+  padding: 20px;
+  font-size: 1.2rem;
+}
+.avatar {
+  font-style: italic;
+  margin-top: auto;
+  margin-bottom: auto;
+  border-bottom: 0px;
+}
+
+.file {
+  border-bottom: 0px;
+}

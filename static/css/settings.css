@@ -1,0 +1,45 @@
+.set input {
+ width: 100%;
+ margin-left: auto;
+ margin-right: auto;
+ margin-bottom: 10px;
+}
+.set img{
+ width: 115px;
+ margin-bottom: 10px;
+}
+.profile-pic-div{
+ height: 200px;
+ width: 200px;
+ position: absolute;
+ border-radius: 50%;
+ overflow: hidden;
+ border: 1px solid grey;
+}
+.save{
+  margin-left: 136px;
+  margin-top: 190px;
+}
+#photo {
+  height: 100%;
+  width: 100%;
+}
+#file {
+  display: none;
+}
+#uploadBtn {
+  height: 40px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  background: rgba(0, 0, 0, 0.7);
+  color: wheat;
+  line-height: 30px;
+  font-family: sans-serif;
+  font-size: 15px;
+  cursor: pointer;
+  display: none;
+}
