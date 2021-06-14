@@ -149,16 +149,12 @@ main>.container {
 }
 
 .head {
-  margin-bottom: 25px;
-  margin-top: 25px;
+  margin-bottom: 35px;
+  margin-top: 5px;
 }
 
 .btn-primary {
   margin-right: 5px;
-}
-
-.t_input {
-  margin: 20px;
 }
 
 .que_form {
