@@ -6,22 +6,22 @@
 {% block header %}
 {% include "include/navbar_user.html" %}
 {% endblock header %}
-        {% block content %}
-        <div class="row t_input">
-        <div class="col-7">
-          <h1>New Questions</h1>
-        </div>
-        <div class="col-3">
-          <a href="{% url 'index' %}">Hot Questions</a>
-        </div>
-        </div>
+{% block content %}
+<div class="row t_input">
+  <div class="col-7">
+    <h1>New Questions</h1>
+  </div>
+  <div class="col question-title">
+    <a href="{% url 'index' %}">Hot Questions</a>
+  </div>
+</div>
 {% for question in questions %}
-        {% include "include/question.html" %}
+{% include "include/question.html" %}
 {% endfor %}
-        {% endblock content %}
-        {% block pagination %}
+{% endblock content %}
+{% block pagination %}
 {% include "include/pagination.html" %}
 {% endblock pagination %}
 {% block linkjs %}
-  <script src="{% static "js/counter.js" %}"></script>
+<script src="{% static "js/counter.js" %}"></script>
 {% endblock linkjs %}

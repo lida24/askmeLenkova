@@ -1,25 +1,26 @@
-.input_form{
+.input_form {
   margin-top: 7px;
 }
 
-.ask_form{
-margin-top: 4%;
-font-size: 20px;
+.ask_form {
+  margin-top: 4%;
+  font-size: 20px;
 }
 
-.input_button{
-margin-left: 116px;
-margin-top: 20px;
+.input_button {
+  margin-left: 116px;
+  margin-top: 20px;
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #0d6efd;
-    border-color: #0d6efd;
-    border-radius: 5px;
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  border-radius: 5px;
 }
+
 .form-control {
   width: 99%;
-      margin-right: auto;
-      margin-left: auto;
+  margin-right: auto;
+  margin-left: auto;
 }

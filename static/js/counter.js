@@ -1,17 +1,16 @@
-const btns = document.querySelectorAll
-('.vote-btn');
+const btns = document.querySelectorAll('.vote-btn');
 btns.forEach(btn => {
-  btn.addEventListener('click', function () {
+  btn.addEventListener('click', function() {
     const direction = this.dataset.direction;
     const inp = this.parentElement
-    .querySelector('.vote-count');
+      .querySelector('.vote-count');
     const currentValue = +inp.value;
     let newValue;
 
-    if(direction === 'plus') {
+    if (direction === 'plus') {
       newValue = currentValue + 1;
     } else {
-      newValue = currentValue - 1 > 0 ? currentValue - 1: 0;
+      newValue = currentValue - 1 > 0 ? currentValue - 1 : 0;
     }
     inp.value = newValue;
   })

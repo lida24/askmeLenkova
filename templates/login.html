@@ -6,29 +6,29 @@
 {% block header %}
 {% include "include/navbar_guest.html" %}
 {% endblock header %}
-         {% block content %}
-         <div class="row head">
-           <div class="col-3">
-             <h1>Log In</h1>
-           </div>
-         </div>
-          <div class="signup">
-       <form class="login_form" method="post" name="form" onsubmit="return validated()">
-           <input type="text" class="form-control" name="user" placeholder="Login" id="user"/>
-           <div id="user_error">Please fill up your login</div>
-           <br>
-           <input type="password" name="password" placeholder="Password" id = "password"/>
-           <div id="pass_error">Please fill up your password. Password must be longer than 6 characters.</div>
-           <br>
-         <input required type="submit" value="Log in">
-         <div class="create account">
-           <p><a href="{% url 'signup' %}">create new account</a></p>
-         </div>
-       </form>
-       </div>
-      {% endblock content %}
-     {% block linkjs %}
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
-     <script type="text/javascript" src="{% static "js/login.js" %}"></script>
-     {% endblock linkjs %}
+{% block content %}
+<div class="row head">
+  <div class="col-3">
+    <h1>Log In</h1>
+  </div>
+</div>
+<div class="signup">
+  <form class="login_form" method="post" name="form" onsubmit="return validated()">
+    <input type="text" class="form-control" name="user" placeholder="Login" id="user" />
+    <div id="user_error">Please fill up your login</div>
+    <br>
+    <input type="password" name="password" placeholder="Password" id="password" />
+    <div id="pass_error">Please fill up your password. Password must be longer than 6 characters.</div>
+    <br>
+    <input required type="submit" value="Log in">
+    <div class="create account">
+      <p><a href="{% url 'signup' %}">create new account</a></p>
+    </div>
+  </form>
+</div>
+{% endblock content %}
+{% block linkjs %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+<script type="text/javascript" src="{% static "js/login.js" %}"></script>
+{% endblock linkjs %}

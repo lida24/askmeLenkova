@@ -8,9 +8,9 @@
 {% endblock header %}
 {% block content %}
 <div class="row t_input">
-<div class="col-7">
-  <h1>Tag: {{ tag }} </h1>
-</div>
+  <div class="col-7">
+    <h1>Tag: {{ tag }} </h1>
+  </div>
 </div>
 {% for question in questions %}
 {% include "include/question.html" %}
@@ -20,5 +20,5 @@
 {% include "include/pagination.html" %}
 {% endblock pagination %}
 {% block linkjs %}
-  <script src="{% static "js/counter.js" %}"></script>
+<script src="{% static "js/counter.js" %}"></script>
 {% endblock linkjs %}
