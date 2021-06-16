@@ -9,13 +9,23 @@
 {% block content %}
 <div class="row head">
   <div class="col-7">
+<<<<<<< HEAD
+    <a href="{% url 'index' %}">
+      <h1>New Questions</h1>
+    </a>
+=======
     <a href="{% url 'index' %}"><h1>New Questions</h1></a>
+>>>>>>> a0896c2174ea462ef2b0a72a7e51fccaecfd71b2
   </div>
   <div class="col question-title">
     <a href="{% url 'hot' %}">Hot Questions</a>
   </div>
 </div>
+<<<<<<< HEAD
+{% for question in content %}
+=======
 {% for question in page_obj.object_list %}
+>>>>>>> a0896c2174ea462ef2b0a72a7e51fccaecfd71b2
 {% include "include/question.html" %}
 {% endfor %}
 {% endblock content %}
