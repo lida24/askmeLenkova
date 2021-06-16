@@ -2,7 +2,6 @@
 
 <div class="row question">
   <div class="col-3">
-    <p class="user-nickname">{{ question.author.user_name }}</p>
     <div class="col"><img src="{% static "img/200.jpg" %}"></div>
     <div class="col">
       <div class="vote-topic-wrapper">
@@ -33,17 +32,12 @@
         <div class="col-6">
           Tags:
           {% for tag in question.tags.all %}
-<<<<<<< HEAD
           <a href="{% url 'tag' tag %}" class="black-jeck">{{ tag.name }}</a>
-=======
-          <a href="{% url "tag" tag=tag %}" class="black-jeck">{{ tag }}</a>
->>>>>>> a0896c2174ea462ef2b0a72a7e51fccaecfd71b2
           {% endfor %}
         </div>
       </div>
     </div>
   </div>
   <div class="footer_question">
-    <p class="creation-date text-muted">Paged: {{ question.creation_date }}</p>
     </div>
 </div>

@@ -8,16 +8,10 @@
 {% include "include/navbar_user.html" %}
 {% endblock header %}
 {% block content %}
-<<<<<<< HEAD
 <div class="col-3 head_question">
 </div>
-=======
-  <div class="col-3 head_question">
-  </div>
->>>>>>> a0896c2174ea462ef2b0a72a7e51fccaecfd71b2
 <div class="row question-list">
   <div class="col-2">
-        <p class="user-nickname">{{ question.author.user_name }}</p>
     <div class="col"><img src="{% static "img/200.jpg" %}"></div>
     <div class="col">
       <div class="vote-topic-wrapper">
@@ -36,9 +30,8 @@
   <div class="col-9">
     <div class="row-cols-1 que_form">
       <div class="col">
-        <div class="head_que">
+        <div class="head">
         <h2>{{ question.title }}</h2>
-<<<<<<< HEAD
         <div> {{ question.text }}</div>
         <div class="row row-cols-2 answer">
           <div class="col-6">
@@ -47,16 +40,6 @@
             <a href={% url 'tag' tag %}>{{ tag.name }} </a>
             {% endfor %}
           </div>
-=======
-        <div> {{ question.content }}</div>
-      <div class="row row-cols-2 answer">
-        <div class="col-6">
-          Tags:
-          {% for tag in question.tags.all %}
-          <a href="{% url "tag" tag=tag %}" class="black-jeck">{{ tag }}</a>
-          {% endfor %}
->>>>>>> a0896c2174ea462ef2b0a72a7e51fccaecfd71b2
-        </div>
         </div>
         </div>
       </div>
@@ -68,11 +51,7 @@ margin-top:10px;
 border-top:1px solid #9EC1D4;">
   </div>
 </div>
-<<<<<<< HEAD
 {% for answer in content %}
-=======
-{% for answer in page_obj.object_list %}
->>>>>>> a0896c2174ea462ef2b0a72a7e51fccaecfd71b2
 {% include "include/answer.html" %}
 {% endfor %}
 <div style="height:20px;
