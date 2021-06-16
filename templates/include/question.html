@@ -2,6 +2,7 @@
 
 <div class="row question">
   <div class="col-3">
+    <p class="user-nickname">{{ question.author.user_name }}</p>
     <div class="col"><img src="{% static "img/200.jpg" %}"></div>
     <div class="col">
       <div class="vote-topic-wrapper">
@@ -9,7 +10,7 @@
           <button class="vote-btn vote-down" data-direction="minus">
             <i class="fa fa-arrow-down" aria-hidden="true"></i>
           </button>
-          <input type="text" value="0" class="vote-count">
+          <input type="text" value="{{ question.rating }}" class="vote-count">
           <button class="vote-btn vote-up" data-direction="plus">
             <i class="fa fa-arrow-up" aria-hidden="true"></i>
           </button>
@@ -23,7 +24,7 @@
         <a href="{% url 'one_question' pk=question.id %}">
           <h2> {{ question.title }} </h2>
         </a>
-        <div> {{ question.text }} </div>
+        <div> {{ question.content }} </div>
       </div>
       <div class="row row-cols-2 answer">
         <div class="col-3">
@@ -31,11 +32,14 @@
         </div>
         <div class="col-6">
           Tags:
-          {% for tag in tags %}
+          {% for tag in question.tags.all %}
           <a href="{% url "tag" tag=tag %}" class="black-jeck">{{ tag }}</a>
           {% endfor %}
         </div>
       </div>
     </div>
   </div>
+  <div class="footer_question">
+    <p class="creation-date text-muted">Paged: {{ question.creation_date }}</p>
+    </div>
 </div>

@@ -9,13 +9,13 @@
 {% block content %}
 <div class="row head">
   <div class="col-7">
-    <h1>New Questions</h1>
+    <a href="{% url 'index' %}"><h1>New Questions</h1></a>
   </div>
   <div class="col question-title">
-    <a href="{% url 'index' %}">Hot Questions</a>
+    <a href="{% url 'hot' %}">Hot Questions</a>
   </div>
 </div>
-{% for question in questions %}
+{% for question in page_obj.object_list %}
 {% include "include/question.html" %}
 {% endfor %}
 {% endblock content %}

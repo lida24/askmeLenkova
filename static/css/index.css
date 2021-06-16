@@ -164,3 +164,16 @@ main>.container {
 .error {
   color: red;
 }
+
+.footer_question{
+      margin-left: 390px;
+}
+
+.head_question{
+  margin: 10px;
+}
+
+.head_que {
+  margin-top: 70px;
+  margin-left: 30px;
+}

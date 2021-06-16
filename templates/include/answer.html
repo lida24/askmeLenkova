@@ -2,6 +2,7 @@
 
  <div class="row question">
    <div class="col-3">
+      <p class="user-nickname">{{ answer.author.user_name }}</p>
      <div class="col"><img src="{% static "img/200.jpg" %}"></div>
      <div class="col">
        <div class="vote-topic-wrapper">
@@ -9,7 +10,7 @@
            <button class="vote-btn vote-down" data-direction="minus">
              <i class="fa fa-arrow-down" aria-hidden="true"></i>
            </button>
-           <input type="text" value="0" class="vote-count">
+           <input type="text" value="{{ answer.rating }}" class="vote-count">
            <button class="vote-btn vote-up" data-direction="plus">
              <i class="fa fa-arrow-up" aria-hidden="true"></i>
            </button>
@@ -20,8 +21,7 @@
    <div class="col-9">
      <div class="row row-cols-1">
        <div class="col">
-         <h2>{{ answer.title }}</h2>
-         <div>{{ answer.text }}</div>
+         <div>{{ answer.content|linebreaks }}</div>
        </div>
        <div class="row row-cols-2 answer">
          <div class="col-1">
@@ -33,6 +33,7 @@
            </div>
          </div>
        </div>
+       <p class="creation-date text-muted" align="right">Paged: {{ answer.creation_date }}</p>
      </div>
    </div>
  </div>
