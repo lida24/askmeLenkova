@@ -11,7 +11,6 @@ class Command(BaseCommand):
     help = 'Closes the specified poll for voting'
 
     def add_arguments(self, parser):
-        # В скобках: (сокращённая запись комманды, полная запись комманды, тип принимаемого параметра)
         parser.add_argument('-u', '--users', type=int)
         parser.add_argument('-t', '--tags', type=int)
         parser.add_argument('-q', '--questions', type=int)
@@ -20,7 +19,6 @@ class Command(BaseCommand):
         parser.add_argument('-vfq', '--votes_for_questions', type=int)
         parser.add_argument('-db', '--database', type=int)
 
-    # Типа функция, связывающая команды с аргументами (или нет...)
     def handle(self, *args, **options):
         if options['users']:
             self.fill_users(options['users'])
@@ -39,7 +37,7 @@ class Command(BaseCommand):
 
     def fill_tags(self, n):
         for i in range(n):
-            Tag.objects.create(name='#' + faker.word() + '_' + faker.word())
+            Tag.objects.create(name=faker.word() + '_' + faker.word())
 
     def fill_users(self, n):
         logins = set()
@@ -136,5 +134,5 @@ class Command(BaseCommand):
         self.fill_tags(n)
         self.fill_questions(n * 10)
         self.fill_answers(n * 100)
-        self.fill_votes_for_questions(n * 100)
-        self.fill_votes_for_answers(n * 100)
+        self.fill_votes_for_questions(n * 200)
+        self.fill_votes_for_answers(n * 200)
