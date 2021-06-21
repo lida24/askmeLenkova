@@ -2,7 +2,7 @@
 
 <div class="row question">
   <div class="col-3">
-    <div class="col"><img src="{% static "img/200.jpg" %}"></div>
+    <div class="col"><img src="{{ question.author.avatar }}"></div>
     <div class="col">
       <div class="vote-topic-wrapper">
         <div class="vote-topic vote-self vote-count-zero">
@@ -27,7 +27,7 @@
       </div>
       <div class="row row-cols-2 answer">
         <div class="col-3">
-          <a href="{% url 'question' pk=question.id %}">answer (3)</a>
+        <a href={% url "question" pk=question.id %}>answer({{ question.answers.count }})</a>
         </div>
         <div class="col-6">
           Tags:

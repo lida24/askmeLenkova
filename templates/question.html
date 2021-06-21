@@ -1,18 +1,16 @@
 {% extends "include/base.html" %}
 {% load static %}
+{% load bootstrap4 %}
 {% block link %}
 <link href="{% static "css/question.css" %}" rel="stylesheet">
 <link rel="stylesheet" href="{% static "font-awesome-4.7.0/css/font-awesome.min.css" %}">
 {% endblock link %}
-{% block header %}
-{% include "include/navbar_user.html" %}
-{% endblock header %}
 {% block content %}
 <div class="col-3 head_question">
 </div>
 <div class="row question-list">
   <div class="col-2">
-    <div class="col"><img src="{% static "img/200.jpg" %}"></div>
+    <div class="col"><img src="{{ question.author.avatar }}"></div>
     <div class="col">
       <div class="vote-topic-wrapper">
         <div class="vote-topic vote-self vote-count-zero">
@@ -61,17 +59,21 @@ margin-left: -11px;
 margin-top:20px;
 padding-bottom: 20px;">
 </div>
-<form action="">
+   {% if request.user.is_authenticated %}
   <div class="row-8">
-    <div class="col">
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Enter your answer here.."></textarea>
-    </div>
-  </div>
-  <div class="pagination pager">
-    <button type="button" class="btn btn-primary ask_button">Answer</button>
-  </div>
+    <form class="form mt-5" method="POST" novalidate>
+            {% csrf_token %}
+            {% bootstrap_form form %}
+    {% buttons %}
+    <button type="submit" class="btn btn-primary ask_button">Answer</button>
+{% endbuttons %}
 </form>
+  </div>
+  {% endif %}
 {% endblock content %}
+{% block pagination %}
+{% include "include/pagination.html" %}
+{% endblock pagination %}
 {% block linkjs %}
 <script src="{% static "js/counter.js" %}"></script>
 {% endblock linkjs %}

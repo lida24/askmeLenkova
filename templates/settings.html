@@ -1,52 +1,20 @@
 {% extends "include/base.html" %}
 {% load static %}
+{% load bootstrap4 %}
 {% block link %}
 <link rel="stylesheet" href="{% static "css/settings.css" %}">
 {% endblock link %}
-{% block header %}
-{% include "include/navbar_user.html" %}
-{% endblock header %}
 {% block content %}
 <div class="col-3 head">
   <h1>Settings</h1>
 </div>
-<div class="row row-cols-2 block">
-  <div class="col-2">Login</div>
-  <form action="">
-    <div class="set">
-      <input type="text" placeholder="login" value="Dr.Pepper">
-    </div>
-  </form>
-</div>
-<div class="row row-cols-2 block">
-  <div class="col-2">Email</div>
-  <form action="">
-    <div class="set">
-      <input type="email" placeholder="Email" value="drpepper@gmail.com">
-    </div>
-  </form>
-</div>
-<div class="row row-cols-2 block">
-  <div class="col-2">NickName</div>
-  <form action="">
-    <div class="set">
-      <input type="text" placeholder="NickName" value="Dr.Pepper">
-    </div>
-  </form>
-</div>
-<div class="row row-cols-2 block">
-  <div class="col-2">Upload avatar</div>
-  <form action="">
-    <div class="profile-pic-div">
-      <img src="{% static "img/200.jpg" %}" id="photo">
-      <input type="file" id="file">
-      <label for="file" id="uploadBtn">Choose photo</label>
-    </div>
-  </form>
-</div>
-<form action="">
-  <button class="btn btn-primary save" type="button">Save</button>
-</form>
+<form class="form mt-5" method="POST" novalidate>
+      {% csrf_token %}
+      {% bootstrap_form form %}
+    {% buttons %}
+  <button class="btn btn-primary save" type="submit">Save</button>
+  {% endbuttons %}
+    </form>
 {% endblock content %}
 {% block linkjs %}
 <script src="{% static "js/settings.js" %}"></script>

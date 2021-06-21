@@ -10,7 +10,7 @@ btns.forEach(btn => {
     if (direction === 'plus') {
       newValue = currentValue + 1;
     } else {
-      newValue = currentValue - 1 > 0 ? currentValue - 1 : 0;
+      newValue = currentValue - 1;
     }
     inp.value = newValue;
   })

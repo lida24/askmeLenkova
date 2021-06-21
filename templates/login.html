@@ -1,24 +1,21 @@
 {% extends "include/base.html" %}
 {% load static %}
+{% load bootstrap4 %}
 {% block link %}
 <link rel="stylesheet" href="{% static "css/login.css" %}">
 {% endblock link %}
-{% block header %}
-{% include "include/navbar_guest.html" %}
-{% endblock header %}
 {% block content %}
 <div class="col-3 head">
   <h1>Log In</h1>
 </div>
 <div class="signup">
-  <form class="login_form" method="post" name="form" onsubmit="return validated()">
-    <input type="text" class="form-control" name="user" placeholder="Login" id="user" />
-    <div id="user_error">Please fill up your login</div>
-    <br>
-    <input type="password" name="password" placeholder="Password" id="password" />
-    <div id="pass_error">Please fill up your password. Password must be longer than 6 characters.</div>
-    <br>
+  {% if error_message %}<p class="error">{{ error_message }}</p> {% endif %}
+  <form class="login_form" action="/login/?next={{ redirect_to }}" method="post" name="form" novalidate>
+    {% csrf_token %}
+      {% bootstrap_form form %}
+    {% buttons %}
     <input required type="submit" value="Log in">
+    {% endbuttons %}
     <div class="create account">
       <p><a href="{% url 'signup' %}">create new account</a></p>
     </div>

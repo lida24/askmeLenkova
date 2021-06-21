@@ -1,32 +1,19 @@
 {% extends "include/base.html" %}
 {% load static %}
+{% load bootstrap4 %}
 {% block link %}
 <link rel="stylesheet" href="{% static "css/ask.css" %}">
 {% endblock link %}
-{% block header %}
-{% include "include/navbar_user.html" %}
-{% endblock header %}
 {% block content %}
 <div class="col-3.5 head">
   <h1>New Question</h1>
 </div>
-  <div class="col-3.5 head">
-    <h1>New Question</h1>
-  </div>
-<form class="ask_form" id="ask">
-  <div class="row row-cols-2 block">
-    <div class="col-2">Title</div>
-    <div class="col-10"><input class="form-control" id="title" name="title" rows="3" placeholder="Input title"></div>
-  </div>
-  <div class="row row-cols-2 block">
-    <div class="col-2">Text</div>
-    <div class="col-10"><textarea class="form-control input_form" id="text" name="text" rows="10" placeholder="Input text"></textarea></div>
-  </div>
-  <div class="row row-cols-2 block">
-    <div class="col-2">Tags</div>
-    <div class="col-10"><input class="form-control input_form" id="tags" name="tags" rows="3" placeholder="Input tags"></div>
-  </div>
-  <input required type="submit" class="btn-primary input_button" value="ASK!">
+  <form class="ask_form" method="POST" novalidate>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+         <input required type="submit" class="btn-primary input_button" value="ASK!">
+           {% endbuttons %}
 </form>
 {% endblock content %}
 {% block linkjs %}

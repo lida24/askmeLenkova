@@ -1,0 +1,66 @@
+{% load static %}
+
+<header>
+  <div class="header__left">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="container-fluid">
+        <div class="col col-md-3 navbar-brand">
+          <a class="navbar-brand" href="#">AskLenkova</a>
+        </div>
+        <div class="header__right">
+            {% if request.user.is_authenticated %}
+          <form class="d-flex col col-md-4 search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">  <a href="{% url 'ask' %}">
+                                ASK!
+                            </a>
+                          </button>
+          </form>
+          {% endif %}
+        </div>
+        <div class="user-container col col-md-2">
+          <div class="row">
+            {% if request.user.is_authenticated %}
+                    <div class="col col-md-3">
+                        <img class="avatar-image" src="{% static "img/20.jpg" %}">
+                    </div>
+                {% endif %}
+            <div class="col">
+              {% if request.user.is_authenticated %}
+              <div class="row-settings"><div>
+                                    {{ request.user.username }}
+                                </div>
+                              </div>
+                                {% endif %}
+              <span class="settings">
+                <div class="row">
+                  {% if request.user.is_authenticated %}
+                                <div class="col col-md-4 settings">
+                                    <a href="{% url "settings" %}">
+                                        Settings
+                                    </a>
+                                </div>
+                            {% endif %}
+                  <div class="col settings">
+                    {% if request.user.is_authenticated %}
+                                  <a href="{% url "logout" %}">
+                                      Logout
+                                  </a>
+                              {% else %}
+                                  <a href="{% url "login" %}">
+                                      Log in
+                                  </a>
+                                  <br>
+                                  <a href="{% url "signup" %}">
+                                      Registration
+                                  </a>
+                              {% endif %}
+                  </div>
+                </div>
+              </span>
+            </div>
+          </div>
+        </div>
+    </nav>
+  </div>
+</header>

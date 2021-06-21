@@ -59,3 +59,8 @@
    border: 1px solid #EF9A9A;
    display: none;
  }
+
+.form-control.is-valid, .was-validated .form-control:valid {
+  border-color: #0d6efd !important;
+  background-image: none !important;
+}

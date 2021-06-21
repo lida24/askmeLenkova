@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(default="../static/img/pic.png")
+    avatar = models.ImageField(default="../static/img/20.jpg")
 
     def __str__(self):
         return self.user.username
@@ -14,7 +14,7 @@ class Profile(models.Model):
 
 class QuestionsManager(models.Manager):
     def new_questions(self):
-        return self.order_by('date')
+        return self.order_by('-date')
 
     def hot_questions(self):
         return self.order_by('-rating')
@@ -50,6 +50,7 @@ class Question(models.Model):
             self.rating += 1
         else:
             self.rating -= 1
+        self.save()
 
 
 class Tag(models.Model):
@@ -64,7 +65,7 @@ class Tag(models.Model):
 
 
 class Answer(models.Model):
-    question = models.ForeignKey('Question', on_delete=models.CASCADE)
+    question = models.ForeignKey('Question', on_delete=models.CASCADE, related_name="answers")
     author = models.ForeignKey('Profile', on_delete=models.CASCADE)
     text = models.TextField()
     rating = models.IntegerField(default=0)
