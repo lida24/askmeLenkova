@@ -19,7 +19,7 @@
           <button class="vote-btn vote-down" data-direction="minus">
             <i class="fa fa-arrow-down" aria-hidden="true"></i>
           </button>
-          <input type="text" value="0" class="vote-count">
+          <input type="text" value="{{ question.rating }}" class="vote-count">
           <button class="vote-btn vote-up" data-direction="plus">
             <i class="fa fa-arrow-up" aria-hidden="true"></i>
           </button>
@@ -72,6 +72,9 @@ padding-bottom: 20px;">
   </div>
 </form>
 {% endblock content %}
+{% block pagination %}
+{% include "include/pagination.html" %}
+{% endblock pagination %}
 {% block linkjs %}
 <script src="{% static "js/counter.js" %}"></script>
 {% endblock linkjs %}
