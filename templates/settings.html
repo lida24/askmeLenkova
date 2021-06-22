@@ -8,7 +8,7 @@
 <div class="col-3 head">
   <h1>Settings</h1>
 </div>
-<form class="form mt-5" method="POST" novalidate>
+<form class="form mt-5" method="POST" novalidate enctype="multipart/form-data">
       {% csrf_token %}
       {% bootstrap_form form %}
     {% buttons %}
