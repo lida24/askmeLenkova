@@ -41,18 +41,3 @@
   <div class="footer_question">
     </div>
 </div>
-
-
-<script>
-  $('.')
-  const request = new Request(
-    '/vote/',
-    {headers: {'X-CSRFToken': csrftoken}}
-);
-fetch(request, {
-    method: 'POST',
-    mode: 'same-origin'  // Do not send CSRF token to another domain.
-}).then(function(response) {
-    console.log(response)
-});
-</script>

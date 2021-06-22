@@ -2,7 +2,7 @@ from django import forms
 from .models import *
 from django.contrib import auth
 from django.contrib.auth.models import User
-
+from django.forms import Textarea, TextInput, FileInput
 
 class LoginForm(forms.Form):
     username = forms.CharField()
@@ -18,17 +18,34 @@ class SignUpForm(forms.ModelForm):
     password_repeat = forms.CharField(widget=forms.PasswordInput(
         attrs={"placeholder": "Confirm password"}))
 
+
     class Meta:
         model = Profile
-        fields = ['username', 'email']
+        fields = ['username', 'email', 'password']
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        check = User.objects.filter(username=username).exists()
+        if check:
+            self.add_error(None, 'User already exists')
+        else:
+            return username
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        check = User.objects.filter(email=email).exists()
+        if check:
+            self.add_error(None, 'Email already exists')
+        else:
+            return email
 
     def clean(self):
-        cleaned_data = super().clean()
-        password = cleaned_data.get("password")
-        password_repeat = cleaned_data.get("password_repeat")
+        password = self.cleaned_data.get("password")
+        repeat_password = self.cleaned_data.get("password_repeat")
+        if password != repeat_password:
+            self.add_error(None, 'Passwords does not math')
+        return self.cleaned_data
 
-        if password != password_repeat:
-            self.add_error(None, "Passwords do not match!")
 
     def save(self):
         user = User.objects.create_user(username=self.cleaned_data.get("username"),
@@ -38,21 +55,53 @@ class SignUpForm(forms.ModelForm):
         Profile.objects.create(user=user)
         return user
 
-
 class SettingsForm(forms.ModelForm):
-    username = forms.CharField(required=False, widget=forms.TextInput())
-    email = forms.EmailField(required=False, widget=forms.EmailInput())
-    avatar = forms.ImageField(required=False, widget=forms.FileInput())
+    username = forms.CharField(required=False, widget=TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'login'
+            }),
+        label='Login')
+    email = forms.EmailField(required=False, widget=TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Email'
+            }),
+        label='Email')
+    avatar = forms.ImageField(required=False, widget=FileInput(attrs={
+                'class': 'form-control'
+            }),
+        label='Avatar')
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        check = User.objects.filter(email=email).exists()
+        if email == '':
+            return email
+        elif check:
+            self.add_error(None, 'Email already exists')
+        else:
+            return email
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        check = User.objects.filter(username=username).exists()
+        if username == '':
+            return username
+        elif check:
+            self.add_error(None, 'Username already exists')
+        else:
+            return username
 
     class Meta:
-        model = Profile
+        model = User
         fields = ['username', 'email', 'avatar']
 
-    def save(self, *args, **kwargs):
-        user = super().save(*args, **kwargs)
-        user.profile.avatar = self.cleaned_data['avatar']
+    def save(self, *args, **kwarg):
+        user = super().save(*args, **kwarg)
+        if self.cleaned_data['avatar']:
+            user.profile.avatar = self.cleaned_data['avatar']
         user.profile.save()
         return user
+
 
 class AnswerForm(forms.Form):
     text = forms.CharField(widget=forms.Textarea(attrs={"placeholder": "Enter your answer here"}), label="")

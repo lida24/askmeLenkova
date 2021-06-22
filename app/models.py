@@ -12,7 +12,7 @@ class Profile(models.Model):
 
 class QuestionsManager(models.Manager):
     def new_questions(self):
-        return self.order_by('-date')
+        return self.all().order_by('date').reverse()
 
     def hot_questions(self):
         return self.order_by('-rating')
@@ -31,7 +31,7 @@ class Question(models.Model):
     author = models.ForeignKey('Profile', on_delete=models.CASCADE)
     tags = models.ManyToManyField('Tag')
     rating = models.IntegerField(default=0)
-    date = models.DateField()
+    date = models.DateTimeField(auto_now_add=True)
 
     objects = QuestionsManager()
 

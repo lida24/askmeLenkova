@@ -30,29 +30,28 @@ def index(request):
 
 @login_required(login_url='/login/')
 def settings(request):
-    if request.method == "GET":
+    if request.method == 'POST':
         user = request.user
-        form = SettingsForm()
-
-    if request.method == "POST":
-        form = SettingsForm(data=request.POST, files=request.FILES, instance=request.user)
+        form = SettingsForm(data=request.POST, files=request.FILES)
         if form.is_valid():
-            user = request.user
-            if user.is_authenticated:
-                if form.cleaned_data["username"] != user.username and form.cleaned_data["username"] != "":
-                    user.username = form.cleaned_data["username"]
-                    user.save()
-                    auth.login(request, user)
-                if form.cleaned_data["email"] != user.email and form.cleaned_data["email"] != "":
-                    user.email = form.cleaned_data["email"]
-                    user.save()
-                    auth.login(request, user)
-                if form.cleaned_data["avatar"] != user.profile.avatar and form.cleaned_data["avatar"] != "":
-                   user.profile.avatar = form.cleaned_data["avatar"]
-                   user.profile.save()
-                   auth.login(request, user)
-    return render(request, "settings.html", {"form": form})
+            if form.cleaned_data['username']:
+                user.username = form.cleaned_data['username']
+            if form.cleaned_data['email']:
+                user.email = form.cleaned_data['email']
+            user.save()
 
+            new_profile = Profile.objects.get(user=request.user)
+
+            if form.cleaned_data['avatar']:
+                new_profile.avatar = form.cleaned_data['avatar']
+            new_profile.save()
+            return redirect(reverse('settings'))
+    else:
+        form = SettingsForm()
+    return render(request, 'settings.html', {
+        'form': form,
+    }
+                  )
 
 def login(request):
     redirect_to = request.GET.get('next', '/')
@@ -76,19 +75,30 @@ def logout(request):
 
 
 def signup(request):
-    if request.method == "GET":
+    error = []
+    if request.method == 'POST':
+        form = SignUpForm(data=request.POST, auto_id=False)
+        if form.is_valid():
+            new_user = form.save()
+            new_user.username= form.cleaned_data['username']
+            new_user.email = form.cleaned_data['email']
+            new_user.save()
+            new_user.set_password(form.cleaned_data['password'])
+            new_user.save()
+            auth.login(request, new_user)
+            return redirect(reverse('index'))
+        else:
+            for err in form.errors['__all__']:
+                error.append(err)
+
+    else:
         form = SignUpForm()
 
-    if request.method == "POST":
-        form = SignUpForm(data=request.POST)
-        if form.is_valid():
-            user = form.save()
-            if user is not None:
-                user.set_password(request.POST['password'])
-                user.save()
-                auth.login(request, user)
-                return redirect("index")
-    return render(request, "signup.html", {"form": form})
+    return render(request, 'signup.html', {
+        'error': error,
+        'form': form
+    }
+                  )
 
 
 def hot(request):

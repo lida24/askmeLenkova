@@ -5,7 +5,7 @@
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <div class="container-fluid">
         <div class="col col-md-3 navbar-brand">
-          <a class="navbar-brand" href="#">AskLenkova</a>
+          <a class="navbar-brand" href="{% url 'index' %}">AskLenkova</a>
         </div>
         <div class="header__right">
             {% if request.user.is_authenticated %}
@@ -22,7 +22,7 @@
           <div class="row">
             {% if request.user.is_authenticated %}
                     <div class="col col-md-3">
-                        <img class="avatar-image" src="{{ user.profile.avatar.url }}">
+                        <img class="avatar-image" src="{{ request.user.profile.avatar.url }}">
                     </div>
                 {% endif %}
             <div class="col">
