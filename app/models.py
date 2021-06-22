@@ -2,11 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-############################################################
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(default="../static/img/20.jpg")
+    avatar = models.ImageField(upload_to="avatar/%Y/%m/%d", default="avatar.jpg")
 
     def __str__(self):
         return self.user.username
@@ -24,7 +22,6 @@ class QuestionsManager(models.Manager):
         return self.filter(tags__in=tag)
 
     def single_question(self, pk):
-        # Важно, чтобы возвращался объект, а не множество объектов.
         return self.filter(id=pk).first()
 
 

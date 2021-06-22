@@ -2,7 +2,7 @@
 
 <div class="row question">
   <div class="col-3">
-    <div class="col"><img src="{{ question.author.avatar }}"></div>
+    <div class="col"><img src="{{ question.author.avatar.url }}"></div>
     <div class="col">
       <div class="vote-topic-wrapper">
         <div class="vote-topic vote-self vote-count-zero">
@@ -41,3 +41,18 @@
   <div class="footer_question">
     </div>
 </div>
+
+
+<script>
+  $('.')
+  const request = new Request(
+    '/vote/',
+    {headers: {'X-CSRFToken': csrftoken}}
+);
+fetch(request, {
+    method: 'POST',
+    mode: 'same-origin'  // Do not send CSRF token to another domain.
+}).then(function(response) {
+    console.log(response)
+});
+</script>

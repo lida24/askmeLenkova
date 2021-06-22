@@ -1,6 +1,7 @@
 from django import forms
 from .models import *
 from django.contrib import auth
+from django.contrib.auth.models import User
 
 
 class LoginForm(forms.Form):
@@ -17,11 +18,9 @@ class SignUpForm(forms.ModelForm):
     password_repeat = forms.CharField(widget=forms.PasswordInput(
         attrs={"placeholder": "Confirm password"}))
 
-    avatar = forms.ImageField(required=False, widget=forms.FileInput())
-
     class Meta:
         model = Profile
-        fields = ['username', 'email', 'avatar']
+        fields = ['username', 'email']
 
     def clean(self):
         cleaned_data = super().clean()
@@ -34,15 +33,26 @@ class SignUpForm(forms.ModelForm):
     def save(self):
         user = User.objects.create_user(username=self.cleaned_data.get("username"),
                                    password=self.cleaned_data.get("password"),
-                                   email=self.cleaned_data.get("email"))
+                                   email=self.cleaned_data.get("email"),
+                                   )
         Profile.objects.create(user=user)
         return user
 
 
-class SettingsForm(forms.Form):
+class SettingsForm(forms.ModelForm):
     username = forms.CharField(required=False, widget=forms.TextInput())
     email = forms.EmailField(required=False, widget=forms.EmailInput())
     avatar = forms.ImageField(required=False, widget=forms.FileInput())
+
+    class Meta:
+        model = Profile
+        fields = ['username', 'email', 'avatar']
+
+    def save(self, *args, **kwargs):
+        user = super().save(*args, **kwargs)
+        user.profile.avatar = self.cleaned_data['avatar']
+        user.profile.save()
+        return user
 
 class AnswerForm(forms.Form):
     text = forms.CharField(widget=forms.Textarea(attrs={"placeholder": "Enter your answer here"}), label="")

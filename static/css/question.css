@@ -1,3 +1,8 @@
 .ask_button {
   margin-top: 15px;
 }
+
+.answer img {
+  width: 115px;
+  height: 115px;
+}

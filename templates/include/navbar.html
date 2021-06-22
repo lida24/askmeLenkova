@@ -22,7 +22,7 @@
           <div class="row">
             {% if request.user.is_authenticated %}
                     <div class="col col-md-3">
-                        <img class="avatar-image" src="{% static "img/20.jpg" %}">
+                        <img class="avatar-image" src="{{ user.profile.avatar.url }}">
                     </div>
                 {% endif %}
             <div class="col">

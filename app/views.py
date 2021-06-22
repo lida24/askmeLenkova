@@ -3,8 +3,11 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib import auth
 from datetime import date
 from datetime import datetime
+from django.http import JsonResponse
+from django.db.models import F
 
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from django.http import HttpResponseForbidden
 from .forms import *
 
@@ -30,11 +33,9 @@ def settings(request):
     if request.method == "GET":
         user = request.user
         form = SettingsForm()
-        if not user.is_authenticated:
-            return HttpResponseForbidden()
 
     if request.method == "POST":
-        form = SettingsForm(data=request.POST)
+        form = SettingsForm(data=request.POST, files=request.FILES, instance=request.user)
         if form.is_valid():
             user = request.user
             if user.is_authenticated:
@@ -46,6 +47,10 @@ def settings(request):
                     user.email = form.cleaned_data["email"]
                     user.save()
                     auth.login(request, user)
+                if form.cleaned_data["avatar"] != user.profile.avatar and form.cleaned_data["avatar"] != "":
+                   user.profile.avatar = form.cleaned_data["avatar"]
+                   user.profile.save()
+                   auth.login(request, user)
     return render(request, "settings.html", {"form": form})
 
 
@@ -80,7 +85,6 @@ def signup(request):
             user = form.save()
             if user is not None:
                 user.set_password(request.POST['password'])
-                print("asd\n\n\n\n")
                 user.save()
                 auth.login(request, user)
                 return redirect("index")
@@ -140,3 +144,9 @@ def ask(request):
                 question.save()
             return redirect("question", pk=question.id)
     return render(request, "ask.html", {"form": form})
+
+@login_required
+@require_POST
+def vote(request):
+    data = request.POST
+    return JsonResponse(data)
