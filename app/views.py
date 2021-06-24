@@ -87,9 +87,6 @@ def signup(request):
             new_user.save()
             auth.login(request, new_user)
             return redirect(reverse('index'))
-        else:
-            for err in form.errors['__all__']:
-                error.append(err)
 
     else:
         form = SignUpForm()
